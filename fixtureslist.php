@@ -1,35 +1,51 @@
+<?php
+    session_start();
+    ?>
 <!DOCTYPE html>
 <html lang=en>
 <head>
     <meta charset="UTF-8">
     <title> Fixtureslist</title>
-    <link rel="stylesheet" href="CSS\style.css">
+    <link rel="stylesheet" href="CSS\stylsheet.css">
+    <link rel="stylesheet" href="CSS\unsemantic.css">
 </head>
 <body> 
 <header>
-        <h1> Sports Union Hub</h1>
-        <h2>  Fixtures </h2>
+<img src="ProjectImages\Uni-logo-RobertGordon_730_290_80.jpg" alt="Institution Logo" id="institution"> 
+<img src="ProjectImages\rguSport.jpg" alt="Sports Union Logo" id="sports">
 </header>
+<h1>  Fixtures </h1>
         <nav>
         <ul>
-            <li><a href="homepage.php">Home</a></li>
-            <li><a href="teamnews.php">Team News</a></li>
-            <li><a href="fixtureslist.php">Fixtures List</a></li>
-            
+            <li><a href="homepage.php"> Home</a></li>
+            <li><a href="fixtureslist.php"> Fixtures List</a></li>
+            <li><a href="avaiselector.php"> Mark Your Availability</a></li>
+            <li><a href="logout.php"> Logout</a></li>
         </ul>
-        </nav>
+    </nav>
         <?php
-        // if easier could get them to write their name in this form and send it across
-        // add fixture from database. Check superhero coding to make sure they will keep adding. Make sure that the radio values repeat for each fixture. php loop?
-        // Need another table in database that just has players names and avaliability on side. On otherside it takes the dates that are added?
-    
+        include ("connect.php");
+        
+        
+        $sql_query="SELECT * FROM matches";
+        $result = $conn -> query($sql_query);
+        while($row=$result->fetch_array())
+        {
+            $opposition=$row['opposition'];
+            $date=$row['date'];
+            $location=$row['location'];
+            echo "<article> 
+            <h3> {$date } {$opposition}  {$location}</h3>
+            </article>";
+        }
 
-        // can make this a show all page and then a seperate drop down page for declaring avaliability?
-        // this would get opened by the admin who makes the new table. Seems smart.
-        // so copy code from marvel superhero to make this a show all. 
+        
+        
         ?>
         
-   
+        <footer>
+    <p> Matthew Max-Lino 2021 CMM007</p>
+    </footer>
 
 </body>
 </html>
